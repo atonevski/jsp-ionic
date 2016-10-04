@@ -1,0 +1,18 @@
+<ion-view view-title='Приградска линија: {{ line }}' hide-back-button='false' align-title='center'>
+  <ion-content>
+    <div class='row'>
+      Route:&nbsp;<small>{{ schedule.route }}</small> 
+    </div>
+    <div class='row'>
+      <div class='col-10'></div>
+      <div class='col col-center'>{{ schedule.a }}</div>
+      <div class='col col-center'>{{ schedule.b }}</div>
+    </div>
+    <div ng-repeat='tm in schedule.table_a' class='row'>
+      <div class='col-10 col-center'
+          style='background-color: #F0F3F8; text-align: center'><small>&nbsp;</small></div>
+      <div class='col col-center'>{{ schedule.table_a[$index].time }}</div>
+      <div class='col col-center'>{{ schedule.table_b[$index].time }}</div>
+    </div>
+  </ion-content>
+</ion-view>

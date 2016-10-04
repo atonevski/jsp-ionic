@@ -1,0 +1,10 @@
+<ion-view view-title='Приградски линии' hide-back-button='false' align-title='center'>
+  <ion-content>
+    <div ng-if='pr_nrows' ng-repeat='r in pr_nrows' class='row'>
+      <div ng-repeat='c in pr_ncols' class='col'>
+        <a ng-if='r*PR_NCOLS + c < pr_lines.length' class='button button-sable button-small'
+           href='#/pr/{{ pr_lines[r*PR_NCOLS + c] }}'>{{ pr_lines[r*PR_NCOLS + c] }}</a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,10 @@
+<ion-view view-title='Градски линии' hide-back-button='false' align-title='center'>
+  <ion-content>
+    <div ng-if='gr_nrows' ng-repeat='r in gr_nrows' class='row'>
+      <div ng-repeat='c in gr_ncols' class='col'>
+        <a ng-if='r*GR_NCOLS + c < gr_lines.length' class='button button-sable button-small'
+           href='#/gr/{{ gr_lines[r*GR_NCOLS + c] }}'>{{ gr_lines[r*GR_NCOLS + c] }}</a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
