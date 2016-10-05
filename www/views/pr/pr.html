@@ -1,7 +1,23 @@
 <ion-view view-title='Приградска линија: {{ line }}' hide-back-button='false' align-title='center'>
   <ion-content>
     <div class='row'>
-      Route:&nbsp;<small>{{ schedule.route }}</small> 
+      <div class='col col-offset-75 text-right'>
+        <select ng-model='wday.mk'
+                ng-options="d for d in ['делник', 'сабота', 'недела']"
+                ng-change='wday_changed()'>
+        </select>
+        <!--
+        <select ng-change='wday_changed()'
+                ng-model='wday.mk'>
+          <option ng-repeat="d in ['делник', 'сабота', 'недела']"
+                  value='{{ d }}' ng-selected='d === wday_mk'>{{ d }}</option>  
+        </select>
+        -->
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col col-10'>Route:</div>
+      <div class='col'><small>{{ schedule.route }}</small></div>
     </div>
     <div class='row'>
       <div class='col-10'></div>

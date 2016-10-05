@@ -83,54 +83,101 @@ angular.module('app', ['ionic']).config(function($stateProvider, $urlRouterProvi
       for (var j = 0, ref = $scope.PR_NCOLS; 0 <= ref ? j < ref : j > ref; 0 <= ref ? j++ : j--){ results.push(j); }
       return results;
     }).apply(this);
-    $scope.pr_nrows = (function() {
+    return $scope.pr_nrows = (function() {
       results1 = [];
       for (var k = 0, ref1 = Math.ceil(pr_lines.length / $scope.PR_NCOLS); 0 <= ref1 ? k < ref1 : k > ref1; 0 <= ref1 ? k++ : k--){ results1.push(k); }
       return results1;
     }).apply(this);
-    return console.log("Loaded PR lines: " + (pr_lines.join(', ')));
   }).error(function(data, status) {
     return console.log("Error loading PR schedule: " + status);
   });
 }).controller('GrController', function($scope, $stateParams) {
-  var line, schedule, today, wday;
+  var day, line, schedule, today;
   today = (new Date()).getDay();
-  wday = (function() {
+  day = (function() {
     switch (false) {
       case indexOf.call([1, 2, 3, 4, 5], today) < 0:
         return 'weekday';
       case today !== 6:
-        return 'saturday';
+        return 'Saturday';
       default:
-        return 'sunday';
+        return 'Sunday';
     }
   })();
+  $scope.wday_to_mk = {
+    weekday: 'делник',
+    Saturday: 'сабота',
+    Sunday: 'недела'
+  };
+  $scope.wday_to_en = {
+    'делник': 'weekday',
+    'сабота': 'Saturday',
+    'недела': 'Sunday'
+  };
   line = $stateParams.line;
   schedule = $scope.gr.filter(function(ln) {
-    return ln.line === line && ln.schedule === wday;
+    return ln.line === line && ln.schedule === day;
   });
+  $scope.wday = {
+    mk: $scope.wday_to_mk[day],
+    en: day
+  };
   $scope.line = line;
   $scope.schedule = schedule[0];
-  return $scope.time = schedule[0].table_a.map(function(e) {
+  $scope.time = schedule[0].table_a.map(function(e) {
     return Object.keys(e)[0];
   });
+  console.log("wday is " + $scope.wday.mk + " " + $scope.wday.en);
+  return $scope.wday_changed = function() {
+    console.log("> " + $scope.wday.mk);
+    $scope.wday.en = $scope.wday_to_en[$scope.wday.mk];
+    schedule = $scope.gr.filter(function(ln) {
+      return ln.line === line && ln.schedule === $scope.wday.en;
+    });
+    $scope.schedule = schedule[0];
+    return console.log("wday is " + $scope.wday.mk + " " + $scope.wday.en);
+  };
 }).controller('PrController', function($scope, $stateParams) {
-  var line, schedule, today, wday;
+  var day, line, schedule, today;
   today = (new Date()).getDay();
-  wday = (function() {
+  day = (function() {
     switch (false) {
       case indexOf.call([1, 2, 3, 4, 5], today) < 0:
         return 'weekday';
       case today !== 6:
-        return 'saturday';
+        return 'Saturday';
       default:
-        return 'sunday';
+        return 'Sunday';
     }
   })();
+  $scope.wday_to_mk = {
+    weekday: 'делник',
+    Saturday: 'сабота',
+    Sunday: 'недела'
+  };
+  $scope.wday_to_en = {
+    'делник': 'weekday',
+    'сабота': 'Saturday',
+    'недела': 'Sunday'
+  };
   line = $stateParams.line;
   schedule = $scope.pr.filter(function(ln) {
-    return ln.line === line && ln.schedule === wday;
+    return ln.line === line && ln.schedule === day;
   });
+  $scope.wday = {
+    mk: $scope.wday_to_mk[day],
+    en: day
+  };
   $scope.line = line;
-  return $scope.schedule = schedule[0];
+  $scope.schedule = schedule[0];
+  console.log("wday is " + $scope.wday.mk + " " + $scope.wday.en);
+  return $scope.wday_changed = function() {
+    console.log("> " + $scope.wday.mk);
+    $scope.wday.en = $scope.wday_to_en[$scope.wday.mk];
+    schedule = $scope.pr.filter(function(ln) {
+      return ln.line === line && ln.schedule === $scope.wday.en;
+    });
+    $scope.schedule = schedule[0];
+    return console.log("wday is " + $scope.wday.mk + " " + $scope.wday.en);
+  };
 });

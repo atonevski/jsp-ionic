@@ -68,30 +68,69 @@ angular.module 'app', ['ionic']
       $scope.PR_WCOLS = 13 # wide cols (landscape)
       $scope.pr_ncols = [0 ... $scope.PR_NCOLS]
       $scope.pr_nrows = [0 ... Math.ceil pr_lines.length / $scope.PR_NCOLS]
-      console.log "Loaded PR lines: #{ pr_lines.join(', ') }"
     .error (data, status) ->
       console.log "Error loading PR schedule: #{ status }"
 .controller 'GrController', ($scope, $stateParams) ->
   today = (new Date()).getDay()
-  wday  = switch
+  day   = switch
             when today in [1 .. 5] then 'weekday'
-            when today is 6 then 'saturday'
-            else 'sunday'
-
+            when today is 6 then 'Saturday'
+            else 'Sunday'
+  $scope.wday_to_mk =
+    weekday:  'делник'
+    Saturday: 'сабота'
+    Sunday:   'недела'
+  $scope.wday_to_en =
+    'делник':   'weekday'
+    'сабота':   'Saturday'
+    'недела':   'Sunday'
   line = $stateParams.line
   schedule = $scope.gr.filter (ln) ->
-    ln.line is line and ln.schedule is wday
+    ln.line is line and ln.schedule is day
+  $scope.wday =
+    mk: $scope.wday_to_mk[day]
+    en: day
   $scope.line = line
   $scope.schedule = schedule[0]
   $scope.time = schedule[0].table_a.map (e) -> Object.keys(e)[0]
+
+  console.log "wday is #{ $scope.wday.mk } #{ $scope.wday.en }"
+  $scope.wday_changed = () ->
+    console.log "> #{ $scope.wday.mk }"
+    $scope.wday.en = $scope.wday_to_en[$scope.wday.mk]
+    schedule = $scope.gr.filter (ln) ->
+      ln.line is line and ln.schedule is $scope.wday.en
+    $scope.schedule = schedule[0]
+    console.log "wday is #{ $scope.wday.mk } #{ $scope.wday.en }"
+
 .controller 'PrController', ($scope, $stateParams) ->
   today = (new Date()).getDay()
-  wday  = switch
+  day   = switch
             when today in [1 .. 5] then 'weekday'
-            when today is 6 then 'saturday'
-            else 'sunday'
+            when today is 6 then 'Saturday'
+            else 'Sunday'
+  $scope.wday_to_mk =
+    weekday:  'делник'
+    Saturday: 'сабота'
+    Sunday:   'недела'
+  $scope.wday_to_en =
+    'делник':   'weekday'
+    'сабота':   'Saturday'
+    'недела':   'Sunday'
   line = $stateParams.line
   schedule = $scope.pr.filter (ln) ->
-    ln.line is line and ln.schedule is wday
+    ln.line is line and ln.schedule is day
+  $scope.wday =
+    mk: $scope.wday_to_mk[day]
+    en: day
   $scope.line = line
   $scope.schedule = schedule[0]
+
+  console.log "wday is #{ $scope.wday.mk } #{ $scope.wday.en }"
+  $scope.wday_changed = () ->
+    console.log "> #{ $scope.wday.mk }"
+    $scope.wday.en = $scope.wday_to_en[$scope.wday.mk]
+    schedule = $scope.pr.filter (ln) ->
+      ln.line is line and ln.schedule is $scope.wday.en
+    $scope.schedule = schedule[0]
+    console.log "wday is #{ $scope.wday.mk } #{ $scope.wday.en }"
