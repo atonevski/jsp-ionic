@@ -72,15 +72,26 @@ angular.module 'app', ['ionic']
     .error (data, status) ->
       console.log "Error loading PR schedule: #{ status }"
 .controller 'GrController', ($scope, $stateParams) ->
+  today = (new Date()).getDay()
+  wday  = switch
+            when today in [1 .. 5] then 'weekday'
+            when today is 6 then 'saturday'
+            else 'sunday'
+
   line = $stateParams.line
   schedule = $scope.gr.filter (ln) ->
-    ln.line is line and ln.schedule is 'weekday'
+    ln.line is line and ln.schedule is wday
   $scope.line = line
   $scope.schedule = schedule[0]
   $scope.time = schedule[0].table_a.map (e) -> Object.keys(e)[0]
 .controller 'PrController', ($scope, $stateParams) ->
+  today = (new Date()).getDay()
+  wday  = switch
+            when today in [1 .. 5] then 'weekday'
+            when today is 6 then 'saturday'
+            else 'sunday'
   line = $stateParams.line
   schedule = $scope.pr.filter (ln) ->
-    ln.line is line and ln.schedule is 'weekday'
+    ln.line is line and ln.schedule is wday
   $scope.line = line
   $scope.schedule = schedule[0]

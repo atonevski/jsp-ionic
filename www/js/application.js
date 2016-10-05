@@ -1,3 +1,5 @@
+var indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
 angular.module('app', ['ionic']).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('home', {
     url: '/home',
@@ -91,10 +93,21 @@ angular.module('app', ['ionic']).config(function($stateProvider, $urlRouterProvi
     return console.log("Error loading PR schedule: " + status);
   });
 }).controller('GrController', function($scope, $stateParams) {
-  var line, schedule;
+  var line, schedule, today, wday;
+  today = (new Date()).getDay();
+  wday = (function() {
+    switch (false) {
+      case indexOf.call([1, 2, 3, 4, 5], today) < 0:
+        return 'weekday';
+      case today !== 6:
+        return 'saturday';
+      default:
+        return 'sunday';
+    }
+  })();
   line = $stateParams.line;
   schedule = $scope.gr.filter(function(ln) {
-    return ln.line === line && ln.schedule === 'weekday';
+    return ln.line === line && ln.schedule === wday;
   });
   $scope.line = line;
   $scope.schedule = schedule[0];
@@ -102,10 +115,21 @@ angular.module('app', ['ionic']).config(function($stateProvider, $urlRouterProvi
     return Object.keys(e)[0];
   });
 }).controller('PrController', function($scope, $stateParams) {
-  var line, schedule;
+  var line, schedule, today, wday;
+  today = (new Date()).getDay();
+  wday = (function() {
+    switch (false) {
+      case indexOf.call([1, 2, 3, 4, 5], today) < 0:
+        return 'weekday';
+      case today !== 6:
+        return 'saturday';
+      default:
+        return 'sunday';
+    }
+  })();
   line = $stateParams.line;
   schedule = $scope.pr.filter(function(ln) {
-    return ln.line === line && ln.schedule === 'weekday';
+    return ln.line === line && ln.schedule === wday;
   });
   $scope.line = line;
   return $scope.schedule = schedule[0];
