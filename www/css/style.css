@@ -1,1 +1,19 @@
 /* Empty. Add your own CSS if you like */
+.row.no-padding { padding: 0px  !important;  }
+.col.no-padding { padding: 0px  !important;  }
+.col.divider { padding-vertical: 0; padding-horizontal: 3px; margin: 0; }
+.col.time {
+  font-size: 11px;
+  padding: 0;
+  margin: 1px;
+  background-color: #F0F3F8;
+  height: 100%;
+  vertical-align: middle;
+}
+.col.schedule {
+  font-size: 13px;
+  padding-vertical: 0;
+  padding-horizontal: 3px;
+  margin: 1px;
+}
+.item.no-padding { padding: 0  !important; margin: 0;}
