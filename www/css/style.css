@@ -1,7 +1,12 @@
 /* Empty. Add your own CSS if you like */
 .row.no-padding { padding: 0px  !important;  }
 .col.no-padding { padding: 0px  !important;  }
-.col.divider { padding-vertical: 0; padding-horizontal: 3px; margin: 0; }
+.col.divider { 
+  padding-vertical: 0;
+  padding-horizontal: 3px; 
+  margin: 0;
+  font-weight: bold;
+}
 .col.time {
   font-size: 11px;
   padding: 0;
@@ -17,3 +22,6 @@
   margin: 1px;
 }
 .item.no-padding { padding: 0  !important; margin: 0;}
+
+.row.row-buttons { padding-vertical: 0; margin: 0; }
+.col.col-buttons { padding-vertical: 0; margin: 0; }

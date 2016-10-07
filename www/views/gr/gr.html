@@ -1,4 +1,4 @@
-<ion-view view-title='Градска линија: {{ line }}' hide-back-button='false' align-title='center'>
+<ion-view view-title='Градска линија: {{ line }}'>
   <ion-content>
     <div class='row'>
       <div class='col col-offset-75 text-right'>
@@ -9,18 +9,15 @@
       </div>
     </div>
     <div class='row'>
-    <!--
-      <div class='col col-10'>Route:</div>
-    -->
       <div class='col col-offset-10'><small>{{ schedule.route }}</small></div>
       <div class='col col-10'></div>
     </div>
     <div class='list'>
-      <div class='item item-divider'>
+      <div class='item item-divider item-text-wrap'>
         <div class='row row-no-padding'>
           <div class='col col-10 no-padding'></div>
-          <div class='col col-center divider'>{{ schedule.a }}</div>
-          <div class='col col-center divider'>{{ schedule.b }}</div>
+          <div class='col col-50 col-center divider'>{{ schedule.a }}</div>
+          <div class='col col-50 col-center divider'>{{ schedule.b }}</div>
         </div>
       </div>
       <div class='item no-padding item-text-wrap' ng-repeat='tm in time'>

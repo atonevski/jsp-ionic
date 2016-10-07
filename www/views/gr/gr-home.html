@@ -1,6 +1,6 @@
-<ion-view view-title='Градски линии' hide-back-button='false' align-title='center'>
+<ion-view view-title='Градски линии'>
   <ion-content>
-    <div ng-if='gr_nrows' ng-repeat='r in gr_nrows' class='row'>
+    <div ng-if='gr_nrows' ng-repeat='r in gr_nrows' class='row no-padding'>
       <div ng-repeat='c in gr_ncols' class='col text-center'>
         <a ng-if='r*GR_NCOLS + c < gr_lines.length'
            class='button button-stable button-block'

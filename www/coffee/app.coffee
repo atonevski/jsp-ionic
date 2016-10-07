@@ -9,6 +9,10 @@ angular.module 'app', ['ionic']
       url:          '/home'
       templateUrl:  'views/home/home.html'
     }
+    .state 'root', {
+      url:          '/'
+      templateUrl:  'views/home/home.html'
+    }
     .state 'gr-home', {
       url:          '/gr-home'
       templateUrl:  'views/gr/gr-home.html'
@@ -41,6 +45,7 @@ angular.module 'app', ['ionic']
       cordova.plugins.Keyboard.disableScroll true
     if window.StatusBar
       StatusBar.styleDefault()
+
 .controller 'MyController', ($scope, $http) ->
   # gr
   $http.get 'data/gr.json'

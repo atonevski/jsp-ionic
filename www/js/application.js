@@ -4,6 +4,9 @@ angular.module('app', ['ionic']).config(function($stateProvider, $urlRouterProvi
   $stateProvider.state('home', {
     url: '/home',
     templateUrl: 'views/home/home.html'
+  }).state('root', {
+    url: '/',
+    templateUrl: 'views/home/home.html'
   }).state('gr-home', {
     url: '/gr-home',
     templateUrl: 'views/gr/gr-home.html'
